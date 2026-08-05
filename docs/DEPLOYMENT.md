@@ -14,7 +14,10 @@
 - LinkedIn production callback: registered as
   `https://posting-signal.vercel.app/api/linkedin/callback`.
 - LinkedIn Client ID and Client Secret: configured in Vercel.
-- Cloudflare account: created; Worker and Cron Trigger are not deployed yet.
+- Cloudflare Worker: deployed as `posting-signal-scheduler` with encrypted
+  `CRON_SECRET`, the Production `PUBLISH_URL`, and a one-minute Cron Trigger.
+- Production scheduling safety test: passed by creating a durable pending job,
+  confirming its scheduled state, and cancelling it before publication.
 
 ## Environment verification
 
@@ -33,7 +36,7 @@ Never commit `.env.local`, `.env.development.local`, or provider credentials.
 
 ## Automatic publishing rollout
 
-Complete these steps in order:
+Production status for these steps:
 
 1. Deploy the Neon-backed approval-to-schedule workflow.
 2. Deploy `/api/cron/publish`, which conditionally claims due jobs, publishes them,
@@ -45,8 +48,9 @@ Complete these steps in order:
 5. Store `PUBLISH_URL` and `CRON_SECRET` as Cloudflare Worker secrets. The
    `CRON_SECRET` value must match Vercel Production.
 6. Configure the free Cloudflare Cron Trigger as `* * * * *` (every minute, UTC).
-7. Run an end-to-end scheduled LinkedIn publishing test and confirm the job cannot
-   be published twice.
+7. The production schedule-and-cancel safety test is complete. Run an end-to-end
+   LinkedIn publishing test only after the LinkedIn product requests are approved,
+   and confirm the job cannot be published twice.
 8. Verify retry, expired-token, cancellation, and permanent-failure behavior before
    enabling automatic publishing for normal use.
 
@@ -58,5 +62,5 @@ Cloudflare.
 
 - Confirm the LinkedIn product requests have been approved before relying on
   production automatic publishing.
-- Deploy the completed database-backed scheduling workflow and durable worker.
-- Deploy and test the Cloudflare Worker after the publishing endpoint is ready.
+- Confirm Cloudflare scheduled invocations remain healthy in Worker Observability.
+- Run the final end-to-end LinkedIn publish test after product approval.

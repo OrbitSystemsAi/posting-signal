@@ -27,7 +27,8 @@
 - [x] Select Cloudflare Workers as the free minute-level scheduling trigger.
 - [x] Create the Cloudflare account.
 - [x] Implement conditional job claiming, duplicate protection, safe retries, and in-app job status.
-- [ ] Deploy the Cloudflare Worker and one-minute Cron Trigger.
+- [x] Deploy the Cloudflare Worker and one-minute Cron Trigger.
+- [x] Pass a Production schedule-and-cancel safety test without publishing to LinkedIn.
 - [ ] Verify LinkedIn product-request approval and complete any remaining review.
 - [ ] Pass an end-to-end automatic publishing test in Production.
 
