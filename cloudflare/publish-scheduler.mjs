@@ -1,4 +1,11 @@
 export default {
+  async fetch() {
+    return Response.json({
+      service: "posting-signal-scheduler",
+      status: "ready",
+    });
+  },
+
   async scheduled(_controller, env, context) {
     context.waitUntil(triggerPublishing(env));
   },
