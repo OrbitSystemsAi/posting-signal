@@ -9,10 +9,11 @@
 5. Pull development keys into `.env.local` without printing values.
 6. Verify every key in `.env.example` is present.
 7. Generate and review the initial migration.
-8. Run `npm run db:migrate`.
-9. Deploy a preview and verify `/api/health`.
-10. Configure OAuth callbacks using the production domain.
-11. Deploy production after auth, deletion, and publishing tests pass.
+8. Run `npm run db:migrate` against Development and verify the resulting tables.
+9. Apply the same reviewed migration to Production before enabling database-backed features.
+10. Deploy a preview and verify `/api/health`.
+11. Configure OAuth callbacks using the production domain.
+12. Deploy production after auth, deletion, and publishing tests pass.
 
 Do not run migrations before Vercel linkage and environment verification. Never
 commit `.env.local` or provider credentials.

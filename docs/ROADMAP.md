@@ -8,9 +8,11 @@
 - [x] Model users, workspaces, posts, OAuth connections, jobs, and engagement.
 - [x] Add secure webhook, health, and scheduled-worker boundaries.
 - [x] Add deployment and architecture documentation.
-- [ ] Create and link the private GitHub and Vercel projects.
-- [ ] Provision Neon and Blob through Vercel.
-- [ ] Apply the initial database migration.
+- [x] Create and link the private GitHub and Vercel projects.
+- [x] Provision Neon through Vercel.
+- [ ] Provision Blob through Vercel.
+- [x] Apply and verify the initial database migration in Development.
+- [ ] Apply the reviewed initial migration to Production before database-backed features launch.
 - [ ] Configure production authentication.
 
 ## Beta 2 — LinkedIn publishing
