@@ -1,10 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { createRoot } from "react-dom/client";
-import "./styles.css";
-import "./calendar.css";
-import "./calendar-interactions.css";
+"use client";
 
-const API = "http://127.0.0.1:3001";
+import React, { useEffect, useMemo, useState } from "react";
+
+const API = "";
 const PILLARS = ["AI readiness", "Finance transformation", "Trusted data", "Executive decision-making"];
 const NAV = ["Today", "Calendar", "Ideas", "Drafts", "Library", "Settings"];
 const TYPES = ["Standard post", "Event", "Celebrate", "Hiring", "Poll", "Document", "Find an expert"];
@@ -21,10 +19,11 @@ const count = (value="") => [...value].length;
 const postText = p => [p.title,p.hook,p.body,p.closing].filter(Boolean).join("\n\n");
 const formatDate = d => new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric"}).format(new Date(`${d}T12:00:00`));
 
-function App(){
-  const [posts,setPosts]=useState(()=>{try{return JSON.parse(localStorage.getItem("signal-posts"))||seed}catch{return seed}});
+export default function PostingSignalApp(){
+  const [posts,setPosts]=useState(seed),[hydrated,setHydrated]=useState(false);
   const [active,setActive]=useState("Today"),[selected,setSelected]=useState(2),[editing,setEditing]=useState(false),[toast,setToast]=useState(""),[mediaOpen,setMediaOpen]=useState(false);
-  useEffect(()=>localStorage.setItem("signal-posts",JSON.stringify(posts)),[posts]);
+  useEffect(()=>{try{setPosts(JSON.parse(localStorage.getItem("signal-posts"))||seed)}catch{setPosts(seed)}finally{setHydrated(true)}},[]);
+  useEffect(()=>{if(hydrated)localStorage.setItem("signal-posts",JSON.stringify(posts))},[posts,hydrated]);
   const post=posts.find(p=>p.id===selected)||posts[0];
   const notify=m=>{setToast(m);setTimeout(()=>setToast(""),2200)};
   const patch=(key,value)=>setPosts(all=>all.map(p=>p.id===selected?{...p,[key]:value}:p));
@@ -97,5 +96,3 @@ function Preview({post,type}){return <section className="preview"><h2>LinkedIn p
 
 function MediaPicker({post,choose,close,canva}){const [query,setQuery]=useState(post.pillar),[results,setResults]=useState([]),[error,setError]=useState("");const search=async e=>{e.preventDefault();const key=localStorage.getItem("signal-unsplash-key");if(!key)return setError("Add your Unsplash Access Key below.");const r=await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=12`,{headers:{Authorization:`Client-ID ${key}`}});const data=await r.json();if(!r.ok)return setError(data.errors?.[0]||"Search failed");setResults(data.results.map(x=>({id:x.id,url:x.urls.regular,thumb:x.urls.small,alt:x.alt_description||query,credit:x.user.name,source:"Unsplash",downloadLocation:x.links.download_location})));setError("")};return <div className="modal"><section><header><div><h2>Choose a post image</h2><p>Search Unsplash or continue in Canva.</p></div><button onClick={close}>✕</button></header><form onSubmit={search}><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search Unsplash"/><button className="primary">Search</button></form><label className="key">Unsplash Access Key<input type="password" defaultValue={localStorage.getItem("signal-unsplash-key")||""} onChange={e=>localStorage.setItem("signal-unsplash-key",e.target.value)}/></label>{error?<p className="error">{error}</p>:null}<div className="mediaresults">{results.map(x=><button key={x.id} onClick={()=>choose(x)}><img src={x.thumb}/><span>Photo by {x.credit}</span></button>)}</div><button className="canva" onClick={canva}>Create in Canva ↗</button></section></div>}
 function Settings({notify}){const erase=async()=>{if(!confirm("Delete PostingSignal account data?"))return;await fetch(`${API}/api/account`,{method:"DELETE"});localStorage.removeItem("signal-posts");localStorage.removeItem("signal-unsplash-key");notify("Account data deleted")};return <div className="settings"><h1>Account and data</h1><p>PostingSignal stores post content in this browser. Canva credentials remain on the local API server.</p><section><h2>Delete account</h2><p>Permanently remove saved posts, the Unsplash key, Canva connection, uploaded documents, and generated images.</p><button className="danger" onClick={erase}>Delete my account</button></section></div>}
-
-createRoot(document.getElementById("root")).render(<App/>);

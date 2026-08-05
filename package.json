@@ -1,25 +1,29 @@
 {
   "name": "posting-signal",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0-beta.1",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "node --watch server/index.mjs",
-    "dev:web": "vite --host 127.0.0.1 --port 3004",
-    "build": "vite build",
-    "start": "node server/index.mjs"
+    "dev": "next dev --hostname 127.0.0.1 --port 3004",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3004",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "concurrently": "^10.0.3",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "jose": "^6.2.3",
-    "multer": "^2.2.0",
+    "@neondatabase/serverless": "latest",
+    "drizzle-orm": "latest",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "vite": "latest"
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "drizzle-kit": "latest",
+    "typescript": "latest"
   }
 }
