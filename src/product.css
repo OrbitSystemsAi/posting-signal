@@ -442,8 +442,13 @@ main { padding: 0; }
   background: var(--editorial-rail);
   box-shadow: 0 -12px 34px rgba(10, 16, 20, .16);
 }
-.nav-carousel-scroll,
-.nav-carousel-track { display: contents; }
+.nav-carousel-track {
+  position: absolute;
+  inset: 0;
+  transform: translateX(var(--nav-drag, 0px));
+  transition: transform .22s ease;
+}
+.nav-carousel.dragging .nav-carousel-track { transition: none; }
 .nav-carousel button {
   position: absolute;
   top: 15px;
@@ -517,6 +522,8 @@ main { padding: 0; }
     overflow: visible;
     border-top: 0;
     background: linear-gradient(to bottom, transparent 0 26px, var(--editorial-rail) 26px 100%);
+    touch-action: pan-y;
+    user-select: none;
   }
   .nav-carousel::after {
     content: "";
@@ -530,45 +537,23 @@ main { padding: 0; }
     transform: translateX(-50%);
     pointer-events: none;
   }
-  .nav-carousel-scroll {
-    position: absolute;
-    z-index: 1;
-    inset: 26px 0 0;
-    display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    overscroll-behavior-x: contain;
-    touch-action: pan-x;
-  }
-  .nav-carousel-scroll::-webkit-scrollbar { display: none; }
   .nav-carousel-track {
-    box-sizing: border-box;
-    width: max-content;
-    min-width: 780px;
-    height: 66px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 36px;
-    padding: 0 28px;
+    z-index: 1;
+    height: 92px;
   }
-  .nav-carousel-scroll button,
-  .nav-carousel-scroll .nav-slot--4,
-  .nav-carousel-scroll .nav-slot--3,
-  .nav-carousel-scroll .nav-slot--2,
-  .nav-carousel-scroll .nav-slot--1,
-  .nav-carousel-scroll .nav-slot-1,
-  .nav-carousel-scroll .nav-slot-2,
-  .nav-carousel-scroll .nav-slot-3 {
-    position: relative;
-    flex: 0 0 42px;
-    top: auto;
-    left: auto;
+  .nav-carousel-track button {
+    top: 37px;
     width: 42px;
     height: 42px;
-    transform: none;
   }
+  .nav-carousel .nav-slot--4 { left: 6%; }
+  .nav-carousel .nav-slot--3 { left: 13.5%; }
+  .nav-carousel .nav-slot--2 { left: 21%; }
+  .nav-carousel .nav-slot--1 { left: 28.5%; }
+  .nav-carousel .nav-slot-0 { left: 50%; }
+  .nav-carousel .nav-slot-1 { left: 71.5%; }
+  .nav-carousel .nav-slot-2 { left: 82.75%; }
+  .nav-carousel .nav-slot-3 { left: 94%; }
   .nav-carousel button.nav-carousel-center { z-index: 3; top: 0; left: 50%; width: 76px; height: 76px; transform: translateX(-50%); box-shadow: 0 0 0 6px var(--editorial-rail), 0 10px 24px rgba(229, 43, 36, .32); }
   .composerhead { grid-template-columns: 1fr; }
   .composerhead h1 { grid-column: auto; }
