@@ -412,7 +412,7 @@ main { padding: 0; }
 }
 .shell > main {
   min-height: calc(100vh - 68px);
-  padding-bottom: 112px;
+  padding-bottom: 128px;
 }
 .app-topbar {
   position: fixed;
@@ -438,7 +438,7 @@ main { padding: 0; }
   position: fixed;
   z-index: 50;
   inset: auto 0 0;
-  height: 76px;
+  height: 96px;
   border-top: 1px solid #00859d;
   background: var(--nav-rail);
   box-shadow: 0 -12px 34px rgba(10, 16, 20, .16);
@@ -477,7 +477,7 @@ main { padding: 0; }
 .nav-carousel button:hover { color: #fff; background: rgba(0, 69, 82, .34); }
 .nav-carousel button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .nav-carousel button.active {
-  top: -28px;
+  top: 4px;
   width: 88px;
   height: 88px;
   color: #fff;
@@ -485,11 +485,7 @@ main { padding: 0; }
   box-shadow: 0 0 0 7px var(--nav-rail), 0 13px 28px rgba(229, 43, 36, .34);
 }
 .nav-carousel button.active::after {
-  content: "";
-  position: absolute;
-  inset: -12px;
-  border: 1px solid rgba(255, 255, 255, .15);
-  border-radius: 50%;
+  display: none;
 }
 .sr-only {
   position: absolute;
@@ -514,36 +510,25 @@ main { padding: 0; }
 
 @media (max-width: 720px) {
   .shell { padding-top: 58px; }
-  .shell > main { min-height: calc(100vh - 58px); padding-bottom: 118px; }
+  .shell > main { min-height: calc(100vh - 58px); padding-bottom: 124px; }
   .app-topbar { height: 58px; padding: 0 16px; }
   .app-topbar .brand { font-size: 18px; }
   .app-topbar .orbit-mark { width: 23px; height: 23px; }
   .nav-carousel {
     height: 92px;
-    overflow: visible;
-    border-top: 0;
-    background: linear-gradient(to bottom, transparent 0 26px, var(--nav-rail) 26px 100%);
+    overflow: hidden;
+    border-top: 1px solid #00859d;
+    background: var(--nav-rail);
     touch-action: pan-y;
     user-select: none;
   }
-  .nav-carousel::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    left: 50%;
-    bottom: 0;
-    width: 104px;
-    height: 66px;
-    background: var(--nav-rail);
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
+  .nav-carousel::after { display: none; }
   .nav-carousel-track {
     z-index: 1;
     height: 92px;
   }
   .nav-carousel-track button {
-    top: 37px;
+    top: 25px;
     width: 42px;
     height: 42px;
   }
@@ -555,7 +540,7 @@ main { padding: 0; }
   .nav-carousel .nav-slot-1 { left: 71.5%; }
   .nav-carousel .nav-slot-2 { left: 82.75%; }
   .nav-carousel .nav-slot-3 { left: 94%; }
-  .nav-carousel button.nav-carousel-center { z-index: 3; top: 0; left: 50%; width: 76px; height: 76px; transform: translateX(-50%); box-shadow: 0 0 0 6px var(--nav-rail), 0 10px 24px rgba(229, 43, 36, .32); }
+  .nav-carousel button.nav-carousel-center { z-index: 3; top: 8px; left: 50%; width: 76px; height: 76px; transform: translateX(-50%); box-shadow: 0 0 0 6px var(--nav-rail), 0 8px 18px rgba(229, 43, 36, .28); }
   .composerhead { grid-template-columns: 1fr; }
   .composerhead h1 { grid-column: auto; }
 }
