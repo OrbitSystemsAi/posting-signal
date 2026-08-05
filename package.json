@@ -4,14 +4,15 @@
   "version": "1.0.0-beta.1",
   "type": "module",
   "scripts": {
-    "dev": "next dev --hostname 127.0.0.1 --port 3004",
+    "dev": "next dev --hostname localhost --port 3004",
     "build": "next build",
-    "start": "next start --hostname 127.0.0.1 --port 3004",
+    "start": "next start --hostname localhost --port 3004",
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.6.5",
     "@neondatabase/serverless": "latest",
     "drizzle-orm": "latest",
     "next": "latest",

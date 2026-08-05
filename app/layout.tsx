@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import "../src/styles.css";
 import "../src/calendar.css";
 import "../src/calendar-interactions.css";
+import "../src/auth.css";
+import "../src/linkedin.css";
+import "../src/legal.css";
 
 export const metadata: Metadata = {
   title: "PostingSignal — Social content workspace",
@@ -11,7 +15,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ClerkProvider>{children}</ClerkProvider>
+      </body>
     </html>
   );
 }

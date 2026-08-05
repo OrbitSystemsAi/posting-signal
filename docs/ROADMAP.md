@@ -10,19 +10,21 @@
 - [x] Add deployment and architecture documentation.
 - [x] Create and link the private GitHub and Vercel projects.
 - [x] Provision Neon through Vercel.
-- [ ] Provision Blob through Vercel.
+- [x] Provision and connect private Blob storage through Vercel.
 - [x] Apply and verify the initial database migration in Development.
 - [x] Apply and verify the reviewed initial migration in Production.
-- [ ] Configure production authentication.
+- [x] Configure Clerk authentication for local, Preview, and Production environments.
 
 ## Beta 2 — LinkedIn publishing
 
-- LinkedIn OAuth connect, reconnect, and revoke.
-- Encrypted token lifecycle and refresh handling.
-- Personal-profile text, image, and document publishing.
-- Approval-to-schedule workflow backed by Neon.
-- Idempotent worker execution, retries, and notifications.
-- LinkedIn developer review and access approval.
+- [x] Implement LinkedIn OAuth connect, reconnect, and revoke routes.
+- [x] Encrypt LinkedIn access tokens at rest.
+- [x] Implement human-confirmed personal-profile text publishing.
+- [ ] Configure the LinkedIn Developer application and production credentials.
+- [ ] Add personal-profile image and document publishing.
+- [ ] Back the approval-to-schedule workflow with Neon.
+- [ ] Add durable idempotency, worker retries, and notifications.
+- [ ] Complete LinkedIn developer review and access approval.
 
 ## Beta 3 — Multi-platform publishing
 

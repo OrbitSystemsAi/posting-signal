@@ -1,0 +1,12 @@
+.settings .connection-card{border:1px solid #d8e0eb;background:#fff;padding:22px;margin-top:30px;border-radius:8px}
+.connection-heading,.connection-actions{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.connection-heading h2{margin:0 0 7px}
+.connection-heading p{margin:0;color:#68758a}
+.connection-state{border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;white-space:nowrap}
+.connection-state.connected{color:#067647;background:#ecfdf3}
+.connection-state.disconnected{color:#475467;background:#f2f4f7}
+.connection-actions{margin-top:20px;padding-top:18px;border-top:1px solid #e6eaf0}
+.connection-actions small{color:#68758a}
+.connection-button{display:inline-block;margin-top:20px;text-decoration:none}
+.settings .danger-zone{border:1px solid #efc0bc;background:#fff8f7;border-radius:8px}
+@media(max-width:720px){.connection-heading,.connection-actions{align-items:flex-start;flex-direction:column}.connection-state{order:-1}}
