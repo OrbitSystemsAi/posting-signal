@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "posting-signal-scheduler",
+  "main": "publish-scheduler.mjs",
+  "compatibility_date": "2026-08-05",
+  "vars": {
+    "PUBLISH_URL": "https://posting-signal.vercel.app/api/cron/publish"
+  },
+  "triggers": {
+    "crons": ["* * * * *"]
+  }
+}

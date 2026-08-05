@@ -12,6 +12,13 @@ export type PublishResult = {
   platformPostUrl?: string;
 };
 
+export class PlatformPublishError extends Error {
+  constructor(message: string, public readonly retryable: boolean) {
+    super(message);
+    this.name = "PlatformPublishError";
+  }
+}
+
 export interface PlatformAdapter {
   platform: PublishablePlatform;
   publish(request: PublishRequest, accessToken: string): Promise<PublishResult>;

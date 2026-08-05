@@ -20,11 +20,16 @@
 - [x] Implement LinkedIn OAuth connect, reconnect, and revoke routes.
 - [x] Encrypt LinkedIn access tokens at rest.
 - [x] Implement human-confirmed personal-profile text publishing.
-- [ ] Configure the LinkedIn Developer application and production credentials.
+- [x] Create the LinkedIn Developer application and submit the required product requests.
+- [x] Register the production OAuth callback and configure LinkedIn credentials in Vercel.
 - [ ] Add personal-profile image and document publishing.
-- [ ] Back the approval-to-schedule workflow with Neon.
-- [ ] Add durable idempotency, worker retries, and notifications.
-- [ ] Complete LinkedIn developer review and access approval.
+- [x] Back the approval-to-schedule workflow with Neon.
+- [x] Select Cloudflare Workers as the free minute-level scheduling trigger.
+- [x] Create the Cloudflare account.
+- [x] Implement conditional job claiming, duplicate protection, safe retries, and in-app job status.
+- [ ] Deploy the Cloudflare Worker and one-minute Cron Trigger.
+- [ ] Verify LinkedIn product-request approval and complete any remaining review.
+- [ ] Pass an end-to-end automatic publishing test in Production.
 
 ## Beta 3 — Multi-platform publishing
 
