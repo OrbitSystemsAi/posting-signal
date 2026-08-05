@@ -12,7 +12,7 @@
 - [x] Provision Neon through Vercel.
 - [ ] Provision Blob through Vercel.
 - [x] Apply and verify the initial database migration in Development.
-- [ ] Apply the reviewed initial migration to Production before database-backed features launch.
+- [x] Apply and verify the reviewed initial migration in Production.
 - [ ] Configure production authentication.
 
 ## Beta 2 — LinkedIn publishing
