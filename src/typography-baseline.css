@@ -1,0 +1,65 @@
+/* PostingSignal typography system */
+:root {
+  --site-font-family: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+  --site-font-size: 14px;
+  --site-font-weight: 400;
+  --site-font-style: normal;
+}
+
+html,
+body {
+  font-family: var(--site-font-family) !important;
+  font-size: var(--site-font-size) !important;
+  font-weight: var(--site-font-weight) !important;
+  font-style: var(--site-font-style) !important;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+body select {
+  border: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: background-color .16s ease, color .16s ease;
+}
+
+body select:hover,
+body select:focus-visible {
+  background-color: #eef7f9 !important;
+  color: #007c93 !important;
+  outline: none;
+}
+
+/* Manage Account is the first surface promoted above the temporary 8px baseline. */
+.cl-modalContent:has(.cl-userProfile-root),
+.cl-userProfile-root {
+  width: min(650px, calc(100vw - 32px)) !important;
+  max-width: calc(100vw - 32px) !important;
+}
+
+.cl-userProfile-root .cl-cardBox {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.cl-userProfile-root,
+.cl-userProfile-root * {
+  font-size: 10px !important;
+}
+
+.cl-userProfile-root .cl-navbarButton svg,
+.cl-userProfile-root .cl-navbarButtonIcon,
+.cl-userProfile-root .cl-navbarButtonIcon svg,
+.cl-userProfile-root .ui-icon {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+  flex: 0 0 14px !important;
+}

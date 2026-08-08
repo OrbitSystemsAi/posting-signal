@@ -5,12 +5,21 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up(.*)",
   "/privacy",
   "/api/health",
+  "/api/news",
   "/api/cron/publish",
   "/api/webhooks(.*)",
 ]);
 
+const isCanvasidePreviewRoute = createRouteMatcher(["/canvaside-preview(.*)"]);
+const isCanvasidePreviewEnabled =
+  process.env.NODE_ENV === "development" &&
+  process.env.CANVASIDE_PREVIEW_ENABLED === "true";
+
 export default clerkMiddleware(async (auth, request) => {
-  if (!isPublicRoute(request)) {
+  const isDevelopmentPreview =
+    isCanvasidePreviewEnabled && isCanvasidePreviewRoute(request);
+
+  if (!isPublicRoute(request) && !isDevelopmentPreview) {
     await auth.protect({ unauthenticatedUrl: new URL("/sign-in", request.url).toString() });
   }
 });

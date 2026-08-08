@@ -35,6 +35,17 @@ export const posts = pgTable("posts", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [index("posts_workspace_schedule_idx").on(table.workspaceId, table.scheduledFor)]);
 
+export const articlePreferences = pgTable("article_preferences", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  workspaceId: uuid("workspace_id").references(() => workspaces.id, { onDelete: "cascade" }).notNull(),
+  articleId: text("article_id").notNull(),
+  saved: boolean("saved").default(false).notNull(),
+  hidden: boolean("hidden").default(false).notNull(),
+  article: jsonb("article").$type<Record<string, unknown>>().default({}).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [uniqueIndex("article_preferences_workspace_article_idx").on(table.workspaceId, table.articleId)]);
+
 export const socialConnections = pgTable("social_connections", {
   id: uuid("id").defaultRandom().primaryKey(),
   workspaceId: uuid("workspace_id").references(() => workspaces.id, { onDelete: "cascade" }).notNull(),

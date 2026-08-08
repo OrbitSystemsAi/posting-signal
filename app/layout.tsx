@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "../src/styles.css";
-import "../src/product.css";
 import "../src/calendar.css";
 import "../src/calendar-interactions.css";
 import "../src/auth.css";
 import "../src/linkedin.css";
 import "../src/legal.css";
+import "../src/typography-baseline.css";
+import "../src/product.css";
 
 export const metadata: Metadata = {
   title: "PostingSignal — Social content workspace",
