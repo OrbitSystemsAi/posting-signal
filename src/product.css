@@ -1808,7 +1808,15 @@ main { padding: 0; }
 .editorial-pulse .spark-adjacent article{position:relative;z-index:2;background:#fff}
 @media(max-width:900px){
   .editorial-pulse .spark-decoration{display:block;left:-155px;top:250px;width:360px;height:430px;opacity:.18;transform:scale(.72);transform-origin:left top}
-  .editorial-pulse .spark-content{position:relative;z-index:1}
+  .editorial-pulse .spark-content{
+    position:relative;
+    z-index:1;
+    inset:auto;
+    left:auto;
+    right:auto;
+    top:auto;
+    width:100%;
+  }
 }
 
 /* Spark is now static: follow the opening stories immediately with the accepted magazine feed. */
