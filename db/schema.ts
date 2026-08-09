@@ -3,6 +3,7 @@ import { boolean, index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqu
 export const postStage = pgEnum("post_stage", ["idea", "draft", "review", "approved", "scheduled", "published", "failed"]);
 export const platform = pgEnum("platform", ["linkedin", "instagram", "threads", "facebook", "x", "bluesky", "mastodon", "tiktok"]);
 export const jobStatus = pgEnum("job_status", ["pending", "processing", "published", "retry", "failed", "cancelled"]);
+export const feedType = pgEnum("feed_type", ["rss", "api", "onn"]);
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -41,6 +42,7 @@ export const articlePreferences = pgTable("article_preferences", {
   articleId: text("article_id").notNull(),
   saved: boolean("saved").default(false).notNull(),
   hidden: boolean("hidden").default(false).notNull(),
+  vote: text("vote"),
   article: jsonb("article").$type<Record<string, unknown>>().default({}).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
@@ -90,3 +92,32 @@ export const engagementItems = pgTable("engagement_items", {
   repliedAt: timestamp("replied_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [uniqueIndex("engagement_platform_item_idx").on(table.connectionId, table.platformItemId)]);
+
+export const newsFeeds = pgTable("news_feeds", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: text("name").notNull(),
+  type: feedType("type").notNull(),
+  endpoint: text("endpoint").notNull(),
+  apiKeyEnv: text("api_key_env"),
+  notes: text("notes").default("").notNull(),
+  active: boolean("active").default(true).notNull(),
+  upvotes: integer("upvotes").default(0).notNull(),
+  downvotes: integer("downvotes").default(0).notNull(),
+  totalArticles: integer("total_articles").default(0).notNull(),
+  totalCategories: integer("total_categories").default(0).notNull(),
+  topCategory: text("top_category"),
+  lastError: text("last_error"),
+  lastRefreshedAt: timestamp("last_refreshed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [uniqueIndex("news_feeds_name_idx").on(table.name)]);
+
+export const newsFeedArticles = pgTable("news_feed_articles", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  feedId: uuid("feed_id").references(() => newsFeeds.id, { onDelete: "cascade" }).notNull(),
+  articleId: text("article_id").notNull(),
+  deliveredAt: timestamp("delivered_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex("news_feed_articles_feed_article_idx").on(table.feedId, table.articleId),
+  index("news_feed_articles_feed_idx").on(table.feedId),
+]);

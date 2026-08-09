@@ -1,0 +1,1 @@
+ALTER TABLE "article_preferences" ADD COLUMN "vote" text;
