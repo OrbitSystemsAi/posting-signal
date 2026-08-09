@@ -68,6 +68,17 @@ captured: <ISO timestamp and timezone>
 - Avoid independently overriding width and height across media queries. Override one dimension and preserve the declared aspect ratio.
 - Treat masked PNG and SVG marks the same way: validate the CSS box ratio in addition to the asset's intrinsic ratio.
 
+### Frame containment invariants
+
+- A frame is the complete bounded region assigned to one content item, including its image, columns, source, date, title, body, trend metadata, and actions.
+- Frames must never overlap another frame at any supported viewport, content length, image state, interaction state, or responsive arrangement.
+- No frame descendant may paint, scroll, or extend outside its frame. Images, copy, metadata, dividers, and actions must remain inside the frame boundary.
+- Every grid and flex child that contains a frame must permit shrinking with `min-width: 0` and `min-height: 0`; long text must wrap rather than increase the track beyond its allocated size.
+- Frames must establish an explicit clipping boundary. Media must use a bounded box with `max-width: 100%`, `object-fit`, and the intended aspect ratio.
+- Action groups and metadata must wrap or reflow inside the frame when their combined intrinsic width exceeds the available row. They may not overlap copy, adjacent frames, or the frame edge.
+- Missing, loading, unusually wide, and unusually long content are required containment test states—not exceptions.
+- Sign-off requires measured confirmation that sibling frame bounding boxes do not intersect and that each frame's descendants remain within its bounding box at every responsive-matrix viewport.
+
 ## Measure before judging
 
 Measure bounding boxes and deltas for:

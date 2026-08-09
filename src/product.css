@@ -1935,3 +1935,151 @@ main { padding: 0; }
   .calendar-post.scheduled{background:var(--ps-teal)}
   .calendar-post.published{background:#6ea750}
 }
+
+/* Spark frame invariants: sibling frames never overlap and children never spill. */
+.editorial-pulse .spark-content,
+.editorial-pulse .pulse-layout-template,
+.editorial-pulse .template-opening,
+.editorial-pulse .template-lower,
+.editorial-pulse .template-feature,
+.editorial-pulse .template-stack,
+.editorial-pulse .template-briefs,
+.editorial-pulse .template-triplet,
+.editorial-pulse .template-long-read,
+.editorial-pulse .template-long-read>div,
+.editorial-pulse .template-reportage,
+.editorial-pulse .template-four-up,
+.editorial-pulse .template-picks,
+.editorial-pulse .template-wide-story,
+.editorial-pulse .template-five-up,
+.editorial-pulse .template-compact-row{
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+}
+.editorial-pulse .lead-story,
+.editorial-pulse .template-story{
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  overflow:hidden;
+  contain:paint;
+}
+.editorial-pulse .lead-story>img,
+.editorial-pulse .template-story>img,
+.editorial-pulse .template-story>.story-image-fallback{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  object-fit:cover;
+}
+.editorial-pulse .lead-copy,
+.editorial-pulse .template-copy,
+.editorial-pulse .lead-copy h2,
+.editorial-pulse .lead-copy p,
+.editorial-pulse .template-copy h2,
+.editorial-pulse .template-copy p{
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.editorial-pulse .lead-footer,
+.editorial-pulse .template-story footer{
+  min-width:0;
+  max-width:100%;
+  flex-wrap:wrap;
+  overflow:hidden;
+}
+.editorial-pulse .article-signal{
+  min-width:0;
+  max-width:100%;
+}
+.editorial-pulse .article-signal b{
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.editorial-pulse .article-actions{
+  min-width:0;
+  max-width:100%;
+  flex-wrap:wrap;
+  overflow:hidden;
+}
+.editorial-pulse .template-opening>*,
+.editorial-pulse .template-lower>*,
+.editorial-pulse .template-stack>*,
+.editorial-pulse .template-triplet>*,
+.editorial-pulse .template-long-read>div>*,
+.editorial-pulse .template-four-up>*,
+.editorial-pulse .template-five-up>*,
+.editorial-pulse .template-compact-row>*{
+  min-width:0;
+  max-width:100%;
+}
+.editorial-pulse .template-picks .brief,
+.editorial-pulse .template-compact-row .brief{
+  grid-template-rows:auto auto;
+  min-height:0;
+}
+.editorial-pulse .template-picks .brief .template-copy,
+.editorial-pulse .template-compact-row .brief .template-copy{
+  padding-bottom:4px;
+}
+.editorial-pulse .template-picks .brief footer,
+.editorial-pulse .template-compact-row .brief footer{
+  position:static;
+  grid-column:1/-1;
+  grid-row:2;
+  width:100%;
+  margin-top:4px;
+  padding:4px 0 0;
+}
+.editorial-pulse .template-picks .brief .article-actions,
+.editorial-pulse .template-compact-row .brief .article-actions{
+  width:100%;
+  justify-content:flex-end;
+  gap:0;
+  padding-left:0;
+  border-left:0;
+}
+.editorial-pulse .template-picks .brief .article-actions button,
+.editorial-pulse .template-compact-row .brief .article-actions button{
+  min-width:20px!important;
+  width:20px;
+  height:20px;
+}
+@media(max-width:1100px){
+  .shell.today-rail-open>main{margin-right:0!important}
+  .shell.today-rail-open .editorial-pulse,
+  .shell.today-rail-open .calendar-workspace{right:auto!important}
+  .shared-today-rail{width:min(var(--shared-rail-width),100vw);box-shadow:-10px 0 30px rgba(16,24,32,.12)}
+  .editorial-pulse .pulse-layout-template{
+    width:100%;
+    margin:28px 0 0;
+    padding:18px 0 50px;
+  }
+  .editorial-pulse .template-opening,
+  .editorial-pulse .template-lower{display:block}
+  .editorial-pulse .template-stack,
+  .editorial-pulse .template-triplet,
+  .editorial-pulse .template-long-read>div,
+  .editorial-pulse .template-four-up,
+  .editorial-pulse .template-five-up,
+  .editorial-pulse .template-compact-row{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+  }
+  .editorial-pulse .template-story{margin-bottom:24px}
+  .editorial-pulse .template-briefs,
+  .editorial-pulse .template-picks{
+    margin-top:28px;
+    padding:18px 0;
+    border:0;
+    border-top:1px solid #d9dee5;
+    border-bottom:1px solid #d9dee5;
+  }
+  .editorial-pulse .template-long-read,
+  .editorial-pulse .template-lower{margin-top:36px}
+}
